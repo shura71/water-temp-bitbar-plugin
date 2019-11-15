@@ -4,7 +4,7 @@
 # <bitbar.author>Shura Scherban</bitbar.author>
 # <bitbar.author.github>shura71</bitbar.author.github>
 # <bitbar.desc>Water temperature in Ukrainian rivers from meteo.gov.ua</bitbar.desc>
-# <bitbar.image>https://github.com/shura71/water-temp-bitbar-plugin/master/water-temp.png</bitbar.image>
+# <bitbar.image>https://raw.github.com/shura71/water-temp-bitbar-plugin/master/water-temp.png</bitbar.image>
 # <bitbar.dependencies>ruby</bitbar.dependencies>
 # <bitbar.abouturl>https://github.com/shura71/water-temp-bitbar-plugin</bitbar.abouturl>
 # encoding: utf-8

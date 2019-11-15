@@ -2,7 +2,7 @@
 Plugin for [BitBar](https://github.com/matryer/bitbar). 
 Water temperature in Ukrainian rivers from [meteo.gov.ua](https://meteo.gov.ua).
 
-![BitBar Example showing Water temperature plugin](https://github.com/shura71/water-temp-bitbar-plugin/master/water-temp.png)
+![BitBar Example showing Water temperature plugin](https://raw.github.com/shura71/water-temp-bitbar-plugin/master/water-temp.png)
 
 ### Possible station ids
 - 80986 - Dnipro
