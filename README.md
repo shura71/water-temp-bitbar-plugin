@@ -7,7 +7,7 @@ Water temperature in Ukrainian rivers from [meteo.gov.ua](https://meteo.gov.ua).
 ### How to use
  - Install ruby
  - Install ruby gems: [nokogiri](http://www.nokogiri.org/tutorials/installing_nokogiri.html) and [openssl](https://github.com/ruby/openssl)
- - Drop water.30m.rb file into your BitBar plugins folder
+ - Drop water.4h.rb file into your BitBar plugins folder
  - Make sure it's executable (in Terminal, do chmod +x water.4h.rb)
  - Edit water.4h.rb and change station id for what you needed
  

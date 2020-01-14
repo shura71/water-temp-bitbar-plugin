@@ -15,8 +15,8 @@ require 'open-uri'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 STATION_ID = '80986'
 
-doc = Nokogiri::XML(open('https://meteo.gov.ua/kml/kml_hydro_warn.kml'))
 begin
+  doc = Nokogiri::XML(open('https://meteo.gov.ua/kml/kml_hydro_warn.kml'))
   kyiv = doc.css('Placemark').reject {|p| p.css('name').text != STATION_ID }.map {|p| p.css('description').text }
   text = kyiv[0].gsub(/(<b>|<\/b>)/,'').gsub(/<br>/,"\n").gsub(/\t/,'').gsub(/^\s+/,'').gsub(/<!--([^>]+)-->/,'').gsub(/\n\n\n/,'')
   lines = ['---']
