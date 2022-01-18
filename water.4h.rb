@@ -22,12 +22,20 @@ begin
   lines = ['---']
   text.split(/\n/).each do |line|
     next if /(Область)/u =~ line
-    lines.unshift("〰️ #{$1}℃") and next if /Температура води (\d+)/u =~ line
+    lines.unshift("〰️ #{$1}℃") and next if /Температура води (\d+\.?\d?)/u =~ line
     lines << line
   end
+  lines.unshift("〰️") if (lines[1].split(//u)[0].ord -  '〰️'.ord) == 0
   lines << '---'
   lines << 'Укргiдрометцентр | href=https://meteo.gov.ua/ua/33345/hydrology/hydr_water_level_changes_map/'
   puts lines.join("\n")
 rescue
   puts "Немає даних постів спостережень!"
 end
+
+puts "---"
+puts "Оновити | refresh=true"
+puts "Налаштування"
+puts "-- Відредагуйте плагін безпосередньо, щоб:"
+puts "-- • Змiнити водойму"
+puts "-----"
