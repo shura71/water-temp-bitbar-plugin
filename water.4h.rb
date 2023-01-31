@@ -11,21 +11,25 @@
 require 'nokogiri'
 require 'openssl'
 require 'open-uri'
+require 'json'
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 STATION_ID = '80986'
 
 begin
-  doc = Nokogiri::XML(open('https://meteo.gov.ua/kml/kml_hydro_warn.kml'))
-  kyiv = doc.css('Placemark').reject {|p| p.css('name').text != STATION_ID }.map {|p| p.css('description').text }
-  text = kyiv[0].gsub(/(<b>|<\/b>)/,'').gsub(/<br>/,"\n").gsub(/\t/,'').gsub(/^\s+/,'').gsub(/<!--([^>]+)-->/,'').gsub(/\n\n\n/,'')
+  stations = JSON.parse(open('https://www.meteo.gov.ua/ua/_hydro-posts.js').read.gsub(/const HYDRO_POSTS = /,'').gsub(/;$/,''))
+  station = stations[STATION_ID]
+  
+  data = JSON.parse(open("https://www.meteo.gov.ua/_/m/hydroday.js?4#{Date.today.strftime("%Y-%m-%d-%H-%M")}").read)[STATION_ID]
+  
   lines = ['---']
-  text.split(/\n/).each do |line|
-    next if /(Область)/u =~ line
-    lines.unshift("〰️ #{$1}℃") and next if /Температура води (\d+\.?\d?)/u =~ line
-    lines << line
-  end
-  lines.unshift("〰️") if (lines[1].split(//u)[0].ord -  '〰️'.ord) == 0
+  
+  lines.unshift("〰️ #{data['TW']}℃")
+  lines << "Пост: #{station['P']}"
+  lines << "Рiчка: #{station['R']}"
+  lines << "Фактичний рівень води: #{data['FR']}см. (#{data['FR_BS']} м БС)"
+  lines << "Рівень за останню добу: #{data['C_FR'] > 0 ? "збiльшився на #{data['C_FR'].abs} м" : (data['C_FR'] < 0 ? "зменшився на #{data['C_FR'].abs} м" : 'без змiн')}"
+  lines << "Дані на #{data['PD']}"
   lines << '---'
   lines << 'Укргiдрометцентр | href=https://meteo.gov.ua/ua/33345/hydrology/hydr_water_level_changes_map/'
   puts lines.join("\n")
