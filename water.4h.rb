@@ -31,7 +31,7 @@ begin
   lines << "Рівень за останню добу: #{data['C_FR'] > 0 ? "збiльшився на #{data['C_FR'].abs} м" : (data['C_FR'] < 0 ? "зменшився на #{data['C_FR'].abs} м" : 'без змiн')}"
   lines << "Дані на #{data['PD']}"
   lines << '---'
-  lines << 'Укргiдрометцентр | href=https://meteo.gov.ua/ua/33345/hydrology/hydr_water_level_changes_map/'
+  lines << 'Укргiдрометцентр | href=https://www.meteo.gov.ua/ua/Shchodenna-hidrolohichna-situaciya'
   puts lines.join("\n")
 rescue
   puts "Немає даних постів спостережень!"
